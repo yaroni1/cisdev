@@ -4,362 +4,454 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>מענקי מחקר - פקולטה למדעי המחשב והמידע</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            padding: 20px;
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            overflow: hidden;
-        }
-
-        header {
-            background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
-            color: white;
-            padding: 40px;
-            text-align: center;
-        }
-
-        h1 {
-            font-size: 2.5em;
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-
-        .subtitle {
-            font-size: 1.2em;
-            opacity: 0.9;
-        }
-
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    
+    body {
+        font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        padding: 20px;
+        line-height: 1.6;
+        direction: rtl;
+    }
+    
+    .container {
+        max-width: 1400px;
+        margin: 0 auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        overflow: hidden;
+    }
+    
+    header {
+        background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        color: white;
+        padding: 40px;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 2.5em;
+        margin-bottom: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    }
+    
+    .subtitle {
+        font-size: 1.2em;
+        opacity: 0.9;
+    }
+    
+    .table-container {
+        padding: 40px;
+        overflow-x: auto;
+        direction: rtl;
+    }
+    
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: white;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        overflow: hidden;
+        direction: rtl;
+    }
+    
+    thead {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+    }
+    
+    th {
+        padding: 20px 15px;
+        text-align: right;
+        font-weight: 600;
+        font-size: 1.1em;
+        border-left: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    
+    th:first-child {
+        border-left: none;
+    }
+    
+    td {
+        padding: 20px 15px;
+        text-align: right;
+        border-bottom: 1px solid #e2e8f0;
+        border-left: 1px solid #e2e8f0;
+        vertical-align: top;
+        direction: rtl;
+    }
+    
+    td:first-child {
+        border-left: none;
+    }
+    
+    tbody tr {
+        transition: all 0.3s ease;
+    }
+    
+    tbody tr:hover {
+        background: #f7fafc;
+        transform: scale(1.01);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
+    
+    .researcher-name {
+        font-weight: 700;
+        color: #2d3748;
+        font-size: 1.1em;
+    }
+    
+    .project-title {
+        font-weight: 600;
+        color: #4a5568;
+        margin-bottom: 5px;
+    }
+    
+    .funding {
+        color: #667eea;
+        font-weight: 600;
+    }
+    
+    a {
+        color: #667eea;
+        text-decoration: none;
+        font-weight: 600;
+        transition: color 0.3s ease;
+    }
+    
+    a:hover {
+        color: #764ba2;
+        text-decoration: underline;
+    }
+    
+    .no-info {
+        color: #a0aec0;
+        font-style: italic;
+    }
+    
+    footer {
+        background: #f7fafc;
+        padding: 30px;
+        text-align: center;
+        color: #4a5568;
+        border-top: 3px solid #667eea;
+    }
+    
+    @media (max-width: 1200px) {
         .table-container {
-            padding: 40px;
-            overflow-x: auto;
+            padding: 20px;
         }
-
+    
+        th, td {
+            padding: 15px 10px;
+            font-size: 0.9em;
+        }
+    
+        h1 {
+            font-size: 2em;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        body {
+            padding: 10px;
+        }
+    
+        header {
+            padding: 20px;
+        }
+    
+        h1 {
+            font-size: 1.5em;
+        }
+    
+        .subtitle {
+            font-size: 1em;
+        }
+    
         table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-            overflow: hidden;
+            font-size: 0.85em;
         }
-
-        thead {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
+    
+        th, td {
+            padding: 10px 8px;
         }
-
-        th {
-            padding: 20px 15px;
-            text-align: right;
-            font-weight: 600;
-            font-size: 1.1em;
-            border-left: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        th:first-child {
-            border-left: none;
-        }
-
-        td {
-            padding: 20px 15px;
-            text-align: right;
-            border-bottom: 1px solid #e2e8f0;
-            border-left: 1px solid #e2e8f0;
-            vertical-align: top;
-        }
-
-        td:first-child {
-            border-left: none;
-        }
-
-        tbody tr {
-            transition: all 0.3s ease;
-        }
-
-        tbody tr:hover {
-            background: #f7fafc;
-            transform: scale(1.01);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .researcher-name {
-            font-weight: 700;
-            color: #2d3748;
-            font-size: 1.1em;
-        }
-
-        .project-title {
-            font-weight: 600;
-            color: #4a5568;
-            margin-bottom: 5px;
-        }
-
-        .funding {
-            color: #667eea;
-            font-weight: 600;
-        }
-
-        a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        a:hover {
-            color: #764ba2;
-            text-decoration: underline;
-        }
-
-        .no-info {
-            color: #a0aec0;
-            font-style: italic;
-        }
-
-        footer {
-            background: #f7fafc;
-            padding: 30px;
-            text-align: center;
-            color: #4a5568;
-            border-top: 3px solid #667eea;
-        }
-
-        @media (max-width: 1200px) {
-            .table-container {
-                padding: 20px;
-            }
-
-            th, td {
-                padding: 15px 10px;
-                font-size: 0.9em;
-            }
-
-            h1 {
-                font-size: 2em;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                padding: 10px;
-            }
-
-            header {
-                padding: 20px;
-            }
-
-            h1 {
-                font-size: 1.5em;
-            }
-
-            .subtitle {
-                font-size: 1em;
-            }
-
-            table {
-                font-size: 0.85em;
-            }
-
-            th, td {
-                padding: 10px 8px;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>מענקי מחקר</h1>
-            <p class="subtitle">פקולטה למדעי המחשב והמידע - אוניברסיטת חיפה</p>
-        </header>
+<div class="container">
+    <header>
+        <h1>מענקי מחקר יוקרתיים</h1>
+        <p class="subtitle">פקולטה למדעי המחשב והמידע - אוניברסיטת חיפה</p>
+    </header>
 
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>חוקר ראשי</th>
-                        <th>שם המחקר</th>
-                        <th>מימון</th>
-                        <th>תקציר המחקר</th>
-                        <th>מאמר מרכזי</th>
-                        <th>סטודנטים</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="researcher-name">פרופ' גד לנדאו</td>
-                        <td>
-                            <div class="project-title">The Recovery Model</div>
-                        </td>
-                        <td>
-                            <span class="funding">ISF 2023-2027</span><br>
-                            (משותף עם Amihood Amir)
-                        </td>
-                        <td>
-                            מחקר בתחום Stringology ו-Pattern Matching. המחקר מציע מודל חדש לטיפול בקלט מקורב או פגום, במקום הגישה המסורתית של parsimony. המטרה היא להבין את המורכבות והיישומיות של המודל החדש.
-                        </td>
-                        <td>
-                            Hideo Bannai et al.<br>
-                            <em>Text Indexing for Simple Regular Expressions</em><br>
-                            CPM 2025: 20:1-20:16<br>
-                            <a href="https://drops.dagstuhl.de/entities/volume/LIPIcs-volume-331" target="_blank">קישור למאמר</a>
-                        </td>
-                        <td class="no-info"></td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' סימון קורמן</td>
-                        <td>
-                            <div class="project-title">Video Registration under Complex Terrain and Object Dynamics</div>
-                        </td>
-                        <td class="no-info"></td>
-                        <td>
-                            פיתוח טכניקות מבוססות NeRF ו-Gaussian Splatting ליישור גיאומטרי צפוף בין פריימים רצופים בווידאו. המחקר מיועד לשיפור יכולות מרחביות ביישומים של רובוטיקה, כלי רכב אוטונומיים, רחפנים ו-AR.
-                        </td>
-                        <td class="no-info"></td>
-                        <td>
-                            <strong>דינה קוגן</strong><br>
-                            <strong>דין עמאר</strong><br>
-                            (סטודנטים לתואר M.Sc. בחוג למדעי המחשב)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' מיכל דורי</td>
-                        <td>
-                            <div class="project-title">Algorithms for Massive Graphs</div>
-                        </td>
-                        <td class="no-info"></td>
-                        <td>
-                            פיתוח אלגוריתמים מהירים לבעיות גרפים בסיסיות בגרפים עצומים, עם דגש על אלגוריתמים מבוזרים ומקבילים מאסיביים. המחקר מתמקד בבעיות הקשורות למרחקים, חתכים וזרימות ברשתות תקשורת בקנה מידה גדול.
-                        </td>
-                        <td class="no-info"></td>
-                        <td class="no-info"></td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' נוגה רון-צבי</td>
-                        <td>
-                            <div class="project-title">Error-Correcting Codes</div>
-                        </td>
-                        <td>
-                            <span class="funding">ERC</span>
-                        </td>
-                        <td>
-                            Error-correcting codes are a method for a redundant representation of data, that enables one to recover the original data even in the presence of some noise or corruption. The project aims to design highly-efficient error-correcting codes that achieve the best possible information-theoretic performance together with super-fast error-correction algorithms, in various communication scenarios, and to explore potential applications of such codes within the theory of computation.
-                        </td>
-                        <td>
-                            <a href="https://dl.acm.org/doi/abs/10.1145/3721477" target="_blank">קישור למאמר</a>
-                        </td>
-                        <td class="no-info"></td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' עמוס קורמן</td>
-                        <td>
-                            <div class="project-title">ביולוגיה אלגוריתמית - שיחור מזון בבעלי-חיים</div>
-                        </td>
-                        <td>
-                            <span class="funding">ISF 2024-2028</span>
-                        </td>
-                        <td>
-                            בהשראת ההבנה שמערכות ביולוגיות מבצעות "חישובים", הפרויקט מציע מבט אלגוריתמי על שיחור מזון בבעלי-חיים---חיפוש טרף, תפיסה וחלוקה. מטרתנו להראות כיצד חשיבה אלגוריתמית יכולה לעצב ניסויים ולהוליד חיזויים ברי-בדיקה, במעבדה ובשטח. הפרויקט מתקדם בשיתוף הדוק עם ניסיונאים במכון ויצמן ובאוניברסיטת תל-אביב. התכלית היא ליצור שדה מחקר חדש---ביולוגיה אלגוריתמית---שבו המחקר הביולוגי נסמך מראש על תובנות אלגוריתמיות ומשתלב עם עבודה אמפירית לכל אורכו.
-                        </td>
-                        <td>
-                            <a href="https://www.pnas.org/doi/10.1073/pnas.2414274121" target="_blank">מאמר על השוואה בין חשיבה קבוצתית בבני אדם לנמלים</a>
-                        </td>
-                        <td>
-                            <strong>Matteo Stromieri</strong><br>                            
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' אור דוקלמן</td>
-                        <td>
-                            <div class="project-title">הצפנת זכרון</div>
-                        </td>
-                        <td>
-                            <span class="funding">ISF</span><br>                            
-                        </td>
-                        <td>
-                            מטרת המענק היא לפתח טכניקות חדשות להצפנת זכרון. הצפנת זכרון היא אחד הרכיבים המרכזיים של אבטחת מידע, והיא מאפשרת להחזיק מידע רגיש בזכרון מבלי לחשוש מזליגתו לגורם זר, או במקרים מסוימים לתהליכים אחרים שרצים על המעבד. המענק יאפשר לאור להמשיך את עבודתו על בדיקת החוזק של צפנים המתאימים להצפנת זכרון, לפתח צפנים חדשים להגנה על זכרון, וכן טכניקות הצפנת זיכרון חדשות שיכולות לשמש במערכות כגון סביבות ענן.
-                        </td>
-                        <td class="no-info"></td>
-                        <td class="no-info"></td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' אורן וינמן</td>
-                        <td>
-                            <div class="project-title">Planar Networks Optimization</div>
-                        </td>
-                        <td>
-                            <span class="funding">ISF</span><br>                            
-                        </td>
-                        <td>
-                            A network is a set of points (called vertices) with some pairs of vertices connected by a line (called an edge). A planar network is a network that can be drawn in such a way that its edges do not cross each other. In planar networks, the most fundamental optimization problems such as shortest paths, maximum flow, and maximum matching are all inter-related through fascinating connections involving distances. With our ISF grant, we have been exploring and exploiting these connections, as well as finding new ones. For example, given a planar network of size n, we have recently shown that there exists a data structure of size only slightly larger than n that can report the distance between any two vertices in constant time.
-                        </td>
-                        <td>
-                            <a href="https://www.cs.haifa.ac.il/~oren/Publications/planaroraclejournal.pdf" target="_blank">קישור למאמר</a>
-                        </td>
-                        <td>
-                            <strong>יאסין עבד-אלחלים</strong><br>
-                            (סטודנט לתואר שלישי בחוג למדעי המחשב)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' רונן שאלתיאל</td>
-                        <td>
-                            <div class="project-title">Pseudorandom Generators and Error-Correcting Codes</div>
-                        </td>
-                        <td>
-                            <span class="funding">ISF</span>
-                        </td>
-                        <td>
-                            The theory of Computer Science is concerned with laying out the mathematical foundations for studying various problems in computer science. In this research we aim to promote our understanding on the theory of "pseudorandom generators", "error-correcting codes" and "randomness extractors".
-                        </td>
-                        <td>
-                            Ronen Shaltiel, Jad Silbak.<br>
-                            <a href="https://dl.acm.org/doi/10.1145/3618260.3649735" target="_blank">Explicit Codes for Poly-Size Circuits and Functions That Are Hard to Sample on Low Entropy Distributions</a>
-                        </td>
-                        <td class="no-info"></td>
-                    </tr>
-                    <tr>
-                        <td class="researcher-name">פרופ' גיא אבני</td>
-                        <td>
-                            <div class="project-title">משחקים על גרפים עם תקציבים</div>
-                        </td>
-                        <td>
-                            <span class="funding">ISF</span><br>                            
-                        </td>
-                        <td>
-                            משחקים על גרפים בין שני שחקנים הוא מודל עם שימושים נרחבים בגמיפיקציה, מערכות מרובות סוכנים ולוגיקה. הפרויקט חוקר משחקים על גרפים בהם לכל אחד מהשחקנים יש תקציב, ובכל תור, השחקנים משתתפים במכרז הקובע מי מבינהם זז בתור. הפרויקט חוקר הרחבות למודל הבסיסי, למשל, משחקים בהם השחקנים אינם יודעים מה התקציב המדויק של היריב שלהם, ומשחקים בהם התקציבים נתונים כמטבעות, מה שכופה גרנולריות על המשחק, שהכרחית לשימושים פרקטיים של המודל.
-                        </td>
-                        <td>
-                            <a href="https://theoretics.episciences.org/15116" target="_blank">קישור למאמר</a>
-                        </td>
-                        <td>
-                            <strong>Suman Sadhukhan</strong><br>
-                            (postdoc)
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>      
+    <div class="table-container" dir="rtl">
+        <table dir="rtl">
+            <thead>
+                <tr>
+                    <th>חוקרים</th>
+                    <th>חוג</th>
+                    <th>שם המחקר</th>
+                    <th style="width: 41.0888%;">מימון</th>
+                    <th>תקציר המחקר</th>
+                    <th>מאמר מרכזי</th>
+                    <th>סטודנטים</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="researcher-name">פרופ' גד לנדאו</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">The Recovery Model</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF 2023-2027</span><br>
+                        (משותף עם Amihood Amir)
+                    </td>
+                    <td>
+                        מחקר בתחום Stringology ו-Pattern Matching. המחקר מציע מודל חדש לטיפול בקלט מקורב או פגום, במקום הגישה המסורתית של parsimony. המטרה היא להבין את המורכבות והיישומיות של המודל החדש.
+                    </td>
+                    <td>
+                        Hideo Bannai et al.<br>
+                        <em>Text Indexing for Simple Regular Expressions</em><br>
+                        CPM 2025: 20:1-20:16<br>
+                        <a href="https://drops.dagstuhl.de/entities/volume/LIPIcs-volume-331" target="_blank">קישור למאמר</a>
+                    </td>
+                    <td class="no-info"><br></td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' סימון קורמן</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">Video Registration under Complex Terrain and Object Dynamics</div>
+                    </td>
+                    <td class="no-info"><br></td>
+                    <td>
+                        פיתוח טכניקות מבוססות NeRF ו-Gaussian Splatting ליישור גיאומטרי צפוף בין פריימים רצופים בווידאו. המחקר מיועד לשיפור יכולות מרחביות ביישומים של רובוטיקה, כלי רכב אוטונומיים, רחפנים ו-AR.
+                    </td>
+                    <td class="no-info"><br></td>
+                    <td>
+                        <strong>דינה קוגן</strong><br>
+                        <strong>דין עמאר</strong><br>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' מיכל דורי</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">Algorithms for Massive Graphs</div>
+                    </td>
+                    <td class="no-info"><br></td>
+                    <td>
+                        פיתוח אלגוריתמים מהירים לבעיות גרפים בסיסיות בגרפים עצומים, עם דגש על אלגוריתמים מבוזרים ומקבילים מאסיביים. המחקר מתמקד בבעיות הקשורות למרחקים, חתכים וזרימות ברשתות תקשורת בקנה מידה גדול.
+                    </td>
+                    <td class="no-info"><br></td>
+                    <td class="no-info"><br></td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' נוגה רון-צבי</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">Error-Correcting Codes</div>
+                    </td>
+                    <td>
+                        <span class="funding">ERC</span>
+                    </td>
+                    <td>קודים מתקני שגיאות הם שיטה לייצוג עודף (redundant) של נתונים, המאפשרת לשחזר את הנתונים המקוריים אפילו בנוכחות רעש או השחתה מסוימת. המחקר שואף לתכנן קודים מתקני שגיאות יעילים ביותר שמשיגים את הביצועים האינפורמציה-תיאורטיים הטובים ביותר האפשריים יחד עם אלגוריתמים לתיקון שגיאות במהירות-על, בתרחישי תקשורת שונים, ולחקור יישומים פוטנציאליים של קודים כאלה בתוך תורת החישוב.</td>
+
+                    <td>
+
+                        <a href="https://dl.acm.org/doi/abs/10.1145/3721477" target="_blank">קישור למאמר</a>
+                    </td>
+                    <td class="no-info"><br></td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' עמוס קורמן</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">ביולוגיה אלגוריתמית - שיחור מזון בבעלי-חיים</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF 2024-2028</span>
+                    </td>
+                    <td>
+                        בהשראת ההבנה שמערכות ביולוגיות מבצעות "חישובים", הפרויקט מציע מבט אלגוריתמי על שיחור מזון בבעלי-חיים---חיפוש טרף, תפיסה וחלוקה. מטרתנו להראות כיצד חשיבה אלגוריתמית יכולה לעצב ניסויים ולהוליד חיזויים ברי-בדיקה, במעבדה ובשטח. הפרויקט מתקדם בשיתוף הדוק עם ניסיונאים במכון ויצמן ובאוניברסיטת תל-אביב. התכלית היא ליצור שדה מחקר חדש---ביולוגיה אלגוריתמית---שבו המחקר הביולוגי נסמך מראש על תובנות אלגוריתמיות ומשתלב עם עבודה אמפירית לכל אורכו.
+                    </td>
+                    <td>
+                        <a href="https://www.pnas.org/doi/10.1073/pnas.2414274121" target="_blank">מאמר על השוואה בין חשיבה קבוצתית בבני אדם לנמלים</a>
+                    </td>
+                    <td>
+                        <strong>Matteo Stromieri</strong><br>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' אור דוקלמן</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">הצפנת זכרון</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF</span><br>
+
+                    </td>
+                    <td>
+                        מטרת המענק היא לפתח טכניקות חדשות להצפנת זכרון. הצפנת זכרון היא אחד הרכיבים המרכזיים של אבטחת מידע, והיא מאפשרת להחזיק מידע רגיש בזכרון מבלי לחשוש מזליגתו לגורם זר, או במקרים מסוימים לתהליכים אחרים שרצים על המעבד. המענק יאפשר לאור להמשיך את עבודתו על בדיקת החוזק של צפנים המתאימים להצפנת זכרון, לפתח צפנים חדשים להגנה על זכרון, וכן טכניקות הצפנת זיכרון חדשות שיכולות לשמש במערכות כגון סביבות ענן.
+                    </td>
+                    <td class="no-info"><br></td>
+                    <td class="no-info"><br></td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' אורן וינמן</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">Planar Networks Optimization</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF</span><br>
+                        (מסתיים בקרוב)
+                    </td>
+                    <td>
+                        רשת היא קבוצה של נקודות (הנקראות קודקודים) כאשר חלק מזוגות הקודקודים מחוברים באמצעות קו (הנקרא צלע). רשת מישורית היא רשת שניתן לשרטט בצורה כזו שהצלעות שלה לא חוצות זו את זו. ברשתות מישוריות, בעיות האופטימיזציה הבסיסיות ביותר כמו מסלולים קצרים ביותר, זרימה מקסימלית, והתאמה מקסימלית, כולן קשורות זו לזו באמצעות קשרים מרתקים הכוללים מרחקים. עם המענק שלנו מ-ISF, אנו חוקרים ומנצלים את הקשרים הללו, וכן מוצאים קשרים חדשים. לדוגמה, בהינתן רשת מישורית בגודל n, הראינו לאחרונה שקיים מבנה נתונים בגודל רק מעט יותר גדול מ-n שיכול לדווח את המרחק בין כל שני קודקודים בזמן קבוע.
+                    </td>
+                    <td>
+                        <a href="https://www.cs.haifa.ac.il/~oren/Publications/planaroraclejournal.pdf" target="_blank">קישור למאמר</a>
+                    </td>
+                    <td>יאסין עבדלחאלים</td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' רונן שאלתיאל</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">Pseudorandom Generators and Error-Correcting Codes</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF</span>
+                    </td>
+                    <td>
+                        תורת מדעי המחשב עוסקת בהנחת היסודות המתמטיים לחקר בעיות שונות במדעי המחשב. במחקר זה אנו שואפים לקדם את ההבנה שלנו בתורת "מחוללי פסאודו-אקראיות" (pseudorandom generators), "קודים מתקני שגיאות" (error-correcting codes) ו"מחלצי אקראיות" (randomness extractors).
+                    </td>
+                    <td>
+                        Ronen Shaltiel, Jad Silbak.<br>
+                        <a href="https://dl.acm.org/doi/10.1145/3618260.3649735" target="_blank">Explicit Codes for Poly-Size Circuits and Functions That Are Hard to Sample on Low Entropy Distributions</a>
+                    </td>
+                    <td class="no-info"><br></td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' גיא אבני</td>
+                    <td>מדעי המחשב</td>
+                    <td>
+                        <div class="project-title">משחקים על גרפים עם תקציבים</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF</span><br>
+                        (מסתיים בקרוב)
+                    </td>
+                    <td>
+                        משחקים על גרפים בין שני שחקנים הוא מודל עם שימושים נרחבים בגמיפיקציה, מערכות מרובות סוכנים ולוגיקה. הפרויקט חוקר משחקים על גרפים בהם לכל אחד מהשחקנים יש תקציב, ובכל תור, השחקנים משתתפים במכרז הקובע מי מבינהם זז בתור. הפרויקט חוקר הרחבות למודל הבסיסי, למשל, משחקים בהם השחקנים אינם יודעים מה התקציב המדויק של היריב שלהם, ומשחקים בהם התקציבים נתונים כמטבעות, מה שכופה גרנולריות על המשחק, שהכרחית לשימושים פרקטיים של המודל.
+                    </td>
+                    <td>
+                        <a href="https://theoretics.episciences.org/15116" target="_blank">קישור למאמר</a>
+                    </td>
+                    <td>
+                        <strong>Suman Sadhukhan</strong><br>
+                        (postdoc)
+                    </td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' פנינה סופר ופרופ' עירית הדר</td>
+                    <td>מערכות מידע</td>
+                    <td>
+                        <div class="project-title">Human Prediction Meets Event Data: Enhancing Hypothesis Generation in Process Mining with Cognitive Tools</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF 2025-2028</span>
+                    </td>
+                    <td>
+                        המחקר עוסק בתהליכים הקוגניטיביים של מנתחי נתונים העוסקים בכריית תהליכים, עם מיקוד ביצירה ובדיקה של היפותיזות ביחס לנתונים. ע"י איסוף וניתוח נתונים מולטי מודאליים (אינטראקציה עם כלי ניתוח, הבעות פנים, תנועות עיניים) מאנליסטים העוסקים במשימות כריית תהליכים, בהתבסס על תיאוריות של פסיכולוגיה קוגניטיבית, ועם שימוש בכלי AI, המחקר (1) יעמיק את ההבנה התיאורטית של תהליכים אלה, (2) יפתח ויבחן ויזואליזציות של נתונים לתמיכה ביצירה ובדיקה של היפותיזות, (3) יפתח מנגנון ניטור, אשר יפעל בצמוד לכלי כריית תהליכים ויוכל לחזות בזמן אמת את סיכויי ההצלחה של האנליסט במשימה בה הוא עוסק, (4) יפתח מנגנון התערבות מבוסס AI, אשר ברגע זיהוי צורך ינהל דיאלוג עם האנליסט ויציע ויזואליזציות חלופיות של הנתונים כדי לתמוך ביצירת היפותיזות.
+                    </td>
+                    <td>
+                        PEM4PPM: A Cognitive Perspective on the Process of Process Mining
+                    </td>
+                    <td>
+                        <strong>יליזבטה סורוקינה מורזון</strong> <br><br>
+                        <strong>ליטל שלו</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' צבי קופליק</td>
+                    <td>מערכות מידע</td>
+                    <td>
+                        <div class="project-title">Hypercube-based User Modeling</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF</span>
+                    </td>
+                    <td>
+                       המחקר מציע שימוש בייצוג גרף ספציפי – היפר-קוביה (hypercube), למידול העדפות המשתמשים ביחס למאפייני התחום. הוא מספק ייצוג קומפקטי שיכול להישמר במכשירים של המשתמשים ולשפר את הפרטיות שלהם. כמו כן הוכח שהוא מספק פתרון טוב לבעיית ההתחלה הקרה (cold-start problem), טוב יותר או דומה לשיטות המתקדמות ביותר כיום, והוא מספק גישה מדידה להכנסת גיוון/סרנדיפיות (diversity/serendipity) לתהליך ההמלצות. הכל במודל אחד.
+                    </td>
+                    <td>
+                        Hertz, A., Kuflik, T., &amp; Tuval, N. (2025).<br>
+                        <a href="https://www.tandfonline.com/doi/abs/10.1080/10447318.2025.2546044" target="_blank">Investigating the Relationship Between User Preferences, Previous Ratings and User Judgments Related to Serendipity</a>
+                    </td>
+                    <td><strong>ד"ר נועה תובל<br><br></strong><strong>ד"ר אלן ווקר<br><br></strong>
+                        <strong>מאיה דינס</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' אנה זמנסקי</td>
+                    <td>מערכות מידע</td>
+                    <td>
+                        <div class="project-title">Pain Paramodulation in Horses</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF-SNSF</span><br>
+                        (פרויקט דו-לאומי עם Prof. Claudia Spadavecchia, University of Bern)
+                    </td>
+                    <td>
+                        פארא-מודולציה של כאב (pain paramodulation) היא תופעה חשובה עם יישומים לטיפול מותאם אישית בכאב. בפרויקט זה אנו חוקרים תופעה זו בסוסים ערים, תוך שימוש בכלי בינה מלאכותית לכימות אינדיקטורים התנהגותיים של כאב משפת גוף והבעות פנים.
+                    </td>
+                    <td>
+                        <a href="https://www.nature.com/articles/s41598-024-83950-y" target="_blank">קישור למאמר</a>
+                    </td>
+                    <td>
+                        <strong>ד"ר מרסלו פיגלשטיין</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="researcher-name">פרופ' יואל לניר</td>
+                    <td>מערכות מידע</td>
+                    <td>
+                        <div class="project-title">שמישות, ניווט ומיפוי מרחבי בסיורים וירטואליים ב-°360</div>
+                    </td>
+                    <td>
+                        <span class="funding">ISF</span>
+                    </td>
+                    <td>
+                        המחקר בוחן את סוגיות השמישות, הניווט והמיפוי המרחבי בסיורים וירטואליים ב-°360 - סיורים אינטראקטיביים המאפשרים למשתמשים לחקור מקומות מרוחקים באופן דיגיטלי. אף שהסיורים הווירטואליים הפכו פופולריים ונגישים יותר בשנים האחרונות, משתמשים רבים מתקשים בניווט וחווים בלבול מרחבי. מתוך גישת אינטראקציית אדם-מחשב, המחקר מבקש להבין כיצד משתמשים נעים ופועלים במרחבים אלה, ולבחון את ההיבטים התיאורטיים של האינטראקציה. באמצעות סדרת מחקרי משתמשים יבחנו דפוסי השימוש הקיימים וההשפעה של עיצובי ממשק שונים על התנהגות המשתמשים ועל תפיסת המרחב. המטרה היא לגבש מסגרת תיאורטית ומעשית שתאפשר פיתוח הנחיות עיצוב לפיתוח של סיורים וירטואליים יעילים ושמישים יותר.
+                    </td>
+                    <td class="no-info"><br></td>
+                    <td>
+                        <strong>רומן שיכרי</strong>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 </body>
 </html>
